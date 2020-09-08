@@ -1,7 +1,7 @@
 const postgres = require('../../controllers/postgres');
 // const { Client } = require('pg');
 
-describe("'postgres.js' tests", () => {
+xdescribe("'postgres.js' tests", () => {
   it('should have the connect, services, communications, health, and docker methods', () => {
     expect(postgres).toHaveProperty('connect');
     expect(postgres).toHaveProperty('services');

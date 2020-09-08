@@ -1,5 +1,8 @@
 {
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
   "parserOptions": {
     "ecmaVersion": 2017,
     "ecmaFeatures": {
@@ -11,7 +14,9 @@
     "node": true,
     "jest": true
   },
-  "plugins": ["prettier"],
+  "plugins": [
+    "prettier"
+  ],
   "rules": {
     "prettier/prettier": "error",
     "no-unused-vars": [

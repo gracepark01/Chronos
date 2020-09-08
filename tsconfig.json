@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "target": "es6",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "lib",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "allowUnreachableCode": false,
+    "module": "commonjs",
+    "strict": false
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": ["node_modules/*", "__tests__/**/*.js"]
+}

@@ -289,17 +289,17 @@ chronos.docker = ({ microservice, interval }) => {
                 .then(() => console.log('Saved to MongoDB!'))
                 .catch(err => console.log('Error saving container data: ', err.message));
             })
-            ['catch'](function (err) {
-              throw err;
-            });
+          ['catch'](function (err) {
+            throw err;
+          });
         }, interval);
       } else {
         throw new Error('Cannot find container data matching the microservice name.');
       }
     })
-    ['catch'](function (err) {
-      throw err;
-    });
+  ['catch'](function (err) {
+    throw err;
+  });
 };
 
 // // grabs container data for multiple containers info - TBD

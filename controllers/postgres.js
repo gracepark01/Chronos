@@ -375,17 +375,17 @@ chronos.docker = function ({ microservice, interval }) {
                 console.log('Saved to SQL!');
               });
             })
-            ['catch'](function (err) {
-              throw err;
-            });
+          ['catch'](function (err) {
+            throw err;
+          });
         }, interval);
       } else {
         throw new Error('Cannot find container data matching the microservice name.');
       }
     })
-    ['catch'](function (err) {
-      throw err;
-    });
+  ['catch'](function (err) {
+    throw err;
+  });
 };
 
 module.exports = chronos;

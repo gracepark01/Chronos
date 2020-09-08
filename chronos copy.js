@@ -1,4 +1,4 @@
-const { Tracer } = require('./src/index.ts')
+const { Tracer } = require ('./src/index.ts')
 const mongo = require('./controllers/mongo.js');
 const postgres = require('./controllers/postgres.js');
 const { validateInput, addNotifications } = require('./controllers/helpers');

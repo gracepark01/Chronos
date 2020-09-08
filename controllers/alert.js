@@ -1,6 +1,5 @@
 const axios = require('axios');
 const nodemailer = require('nodemailer');
-
 const alert = {};
 
 /**

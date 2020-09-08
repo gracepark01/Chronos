@@ -1,17 +1,23 @@
 {
   "package name": "chronos",
-  "name": "chronos-microservice-debugger5",
-  "version": "4.0.3",
-  "description": "Microservice communication and health visualizer.",
-  "main": "chronos.js",
-  "scripts": {
-    "test": "jest",
-    "test:all": "jest ./__tests__/*"
+  "name": "chronos",
+  "version": "5.0.1",
+  "description": "microservice route tracing and health monitoring tool",
+  "engines": {
+    "node": ">=0.10"
   },
-  "deprecated": false,
+  "files": [
+    "src",
+    "lib",
+    "dist"
+  ],
+  "license": "MIT",
+  "author": "Chronos 5.0",
+  "main": "chronos.js",
   "keywords": [
     "microservice",
-    "debugger",
+    "tracer",
+    "chronos",
     "microservice-health",
     "microservice-health-monitor",
     "health-monitor",
@@ -19,27 +25,60 @@
     "microservice-communication-monitor",
     "docker-monitor"
   ],
-  "author": "Chronos 3.0",
-  "license": "MIT",
+  "scripts": {
+    "prepare": "npm run build",
+    "lint": "tslint -t msbuild -c tslint.json 'src/**/*.ts'",
+    "jest": "jest",
+    "jest:all": "jest ./__tests__/*",
+    "unit-test": "npm run build && mocha lib/test/unittest.js --check-leaks --color",
+    "cover": "npm run test-cover && istanbul check-coverage",
+    "test-cover": "istanbul cover --report lcovonly --print none ./node_modules/.bin/_mocha lib/test/unittest.js -- --check-leaks --color && istanbul report text",
+    "cover-html": "istanbul cover --report html --print none ./node_modules/.bin/_mocha lib/test/unittest.js -- --check-leaks --color && istanbul report text",
+    "webpack": "webpack --display-error-details",
+    "build": "tsc -p .",
+    "watch": "tsc -w -p .",
+    "typedoc": "typedoc --out typedoc --tsconfig tsconfig.json --mode file",
+    "demo": "node lib/examples/demo.js",
+    "jen": "npm run prepare && node lib/examples/jen.js",
+    "all": "npm run prepare && npm run demo && npm run jen && npm run cover && npm run test-cover && npm run cover-html && npm run typedoc && npm run unit-test && npm run webpack",
+    "delete": "rm -r coverage & rm -r dist & rm -r lib & rm -r typedoc"
+  },
   "dependencies": {
-    "axios": "^0.19.2",
-    "hpropagate": "0.0.7",
-    "mongoose": "^5.9.16",
-    "nodemailer": "^6.4.10",
-    "pg": "^7.18.2",
-    "systeminformation": "^4.26.4"
+    "@types/uuid": "^8.3.0",
+    "axios": "^0.20.0",
+    "mongoose": "^5.10.3",
+    "nodemailer": "^6.4.11",
+    "pg": "^8.3.3",
+    "systeminformation": "^4.27.3",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/chai": "4.1.4",
+    "@types/mocha": "2.2.40",
+    "chai": "^4.1.2",
+    "clone": "^2.1.1",
+    "colors": "^1.1.2",
+    "coveralls": "^3.0.1",
+    "cross-env": "^5.2.0",
+    "express": "^4.17.1",
+    "istanbul": "^0.4.5",
+    "jest": "^26.4.2",
+    "json-loader": "^0.5.4",
+    "mocha": "^2.4.5",
+    "prettier": "^2.1.1",
+    "shelljs": "^0.8.2",
+    "source-map-loader": "^1.1.0",
+    "source-map-support": "^0.5.6",
+    "surge": "^0.21.6",
+    "ts-loader": "^4.4.1",
+    "tslint": "^5.0.0",
+    "typedoc": "^0.19.1",
+    "typescript": "^3.2.2",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   },
   "optionalDependencies": {
     "osx-temperature-sensor": "^1.0.7",
-    "wmic": "^0.3.0"
-  },
-  "devDependencies": {
-    "eslint": "^7.2.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-prettier": "^3.1.4",
-    "jest": "^26.1.0",
-    "prettier": "^2.0.5"
+    "wmic": "^0.5.0"
   }
 }

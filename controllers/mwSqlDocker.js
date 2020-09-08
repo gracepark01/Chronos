@@ -1,6 +1,6 @@
 var si = require('systeminformation');
 var chronos = {
-  microDocker: function (userInputMSName, uri, queryFreq) {},
+  microDocker: function (userInputMSName, uri, queryFreq) { },
 };
 // queryObj determines the setInterval needed for microHealth based on queryFreq parameter provided by user
 var queryObj = {
@@ -103,18 +103,18 @@ chronos.microDocker = function (userInputMSName, uri, queryFreq) {
                 console.log('Saved to PostgreSQL!');
               });
             })
-            ['catch'](function (err) {
-              // console.log(err);
-              throw err;
-            });
+          ['catch'](function (err) {
+            // console.log(err);
+            throw err;
+          });
         }, queryObj[queryFreq]);
       } else {
         // console.log('Cannot find container data matching the microservice name.')
         throw new Error('Cannot find container data matching the microservice name.');
       }
     })
-    ['catch'](function (err) {
-      throw err;
-    });
+  ['catch'](function (err) {
+    throw err;
+  });
 };
 module.exports = chronos;

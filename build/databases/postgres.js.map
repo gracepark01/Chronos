@@ -1,0 +1,1 @@
+{"version":3,"file":"postgres.js","sourceRoot":"","sources":["../../electron/databases/postgres.ts"],"names":[],"mappings":";;AAAA,yBAA0B;AAC1B,qKAAqK;AACrK,IAAM,UAAU,GAAG,UAAC,CAAS,EAAE,GAAW;IACxC,OAAO,IAAI,SAAI,CAAC;QACd,gBAAgB,EAAE,GAAG;KACtB,CAAC,CAAC;AACL,CAAC,CAAC;AAEF,kBAAe,UAAU,CAAC"}
