@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "description": "A set of basic microservices to test Chronos' features.",
   "scripts": {
-    "dev": "(cd books && npm start) & (cd customers && npm start) & (cd orders && npm start) & (cd frontend && npm start)"
+    "install": " (cd books && npm install) && (cd customers && npm install) && (cd orders && npm install) && (cd frontend && npm install)",
+    "docker": "docker-compose -f docker-compose.yml up"
   },
   "babel": {
     "presets": [
