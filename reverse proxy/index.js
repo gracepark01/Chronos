@@ -1,6 +1,11 @@
 window.onload = () => {
   // microservice1 - Books
-  const microservicePort = { 3000: 'Reverse Proxy', 4545: 'Books', 7777: 'Orders', 5555: 'Customers' };
+  const microservicePort = {
+    3000: 'Reverse Proxy',
+    4545: 'Books',
+    7777: 'Orders',
+    5555: 'Customers',
+  };
   // sets the title of the page to whatever port you're currently on
   document.title = microservicePort[window.location.port];
   // create a display that when clicked will grab the books passed in
@@ -16,10 +21,13 @@ window.onload = () => {
     const numberOfPages = document.getElementById('field_C1').value;
     const publisher = document.getElementById('field_D1').value;
     if (!title || !author || !numberOfPages || !publisher) {
-      return alert("Every Books field must be completed");
+      return alert('Every Books field must be completed');
     }
     let book = {
-      title, author, numberOfPages, publisher,
+      title,
+      author,
+      numberOfPages,
+      publisher,
     };
     book = JSON.stringify(book);
     fetch('http://localhost:3000/books/createbook', {
@@ -44,42 +52,49 @@ window.onload = () => {
     newDisplay.id = 'display';
     newDisplay.innerHTML = 'List of books';
     document.getElementById('container').appendChild(newDisplay);
+
     fetch('http://localhost:3000/books/getbooks', {
-      method: 'GET',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({ query: 'query { books{ title } }' }),
     })
       .then((res) => res.json())
       .then((data) => {
-        for (let i = 0; i < data.length; i += 1) {
-          const newEntry = document.createElement('li');
-          const bookInDb = data[i];
-          newEntry.innerHTML = `READ: ${bookInDb.title}`;
-          document.getElementById('display').appendChild(newEntry);
-          const deleteButton = document.createElement('button');
-          deleteButton.innerHTML = 'Delete';
-          newEntry.appendChild(deleteButton);
-          // the items displayed from the read's completed execution
-          // displays a new 'ul' for each item and appended on that
-          //  is it's associated delete button functionality
-          deleteButton.addEventListener('click', () => {
-            const display = document.getElementById('display');
-            display.remove();
-            const newDisplay = document.createElement('ul');
-            newDisplay.id = 'display';
-            document.getElementById('container').appendChild(newDisplay);
-            const url = new URL('http://localhost:3000/books/deletebook:id?');
-            url.searchParams.append('id', bookInDb._id);
-            fetch(url, {
-              method: 'DELETE',
-              headers: { 'Content-Type': 'application/json' },
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                const newEntry = document.createElement('li');
-                newEntry.innerHTML = `DELETED: ${data.title}`;
-                document.getElementById('display').appendChild(newEntry);
-              });
-          });
-        }
+        console.log('books data', data);
+        // for (let i = 0; i < data.length; i += 1) {
+        //   const newEntry = document.createElement('li');
+        //   const bookInDb = data[i];
+        //   newEntry.innerHTML = `READ: ${bookInDb.title}`;
+        //   document.getElementById('display').appendChild(newEntry);
+        //   const deleteButton = document.createElement('button');
+        //   deleteButton.innerHTML = 'Delete';
+        //   newEntry.appendChild(deleteButton);
+        //   // the items displayed from the read's completed execution
+        //   // displays a new 'ul' for each item and appended on that
+        //   //  is it's associated delete button functionality
+        //   deleteButton.addEventListener('click', () => {
+        //     const display = document.getElementById('display');
+        //     display.remove();
+        //     const newDisplay = document.createElement('ul');
+        //     newDisplay.id = 'display';
+        //     document.getElementById('container').appendChild(newDisplay);
+        //     const url = new URL('http://localhost:3000/books/deletebook:id?');
+        //     url.searchParams.append('id', bookInDb._id);
+        //     fetch(url, {
+        //       method: 'DELETE',
+        //       headers: { 'Content-Type': 'application/json' },
+        //     })
+        //       .then((res) => res.json())
+        //       .then((data) => {
+        //         const newEntry = document.createElement('li');
+        //         newEntry.innerHTML = `DELETED: ${data.title}`;
+        //         document.getElementById('display').appendChild(newEntry);
+        //       });
+        //   });
+        // }
       });
   });
 
@@ -117,10 +132,12 @@ window.onload = () => {
     const age = document.getElementById('field_B2').value;
     const address = document.getElementById('field_C2').value;
     if (!name || !age || !address) {
-      return alert("Every Customers field must be completed");
+      return alert('Every Customers field must be completed');
     }
     let customer = {
-      name, age, address,
+      name,
+      age,
+      address,
     };
     customer = JSON.stringify(customer);
     fetch('http://localhost:3000/customers/createcustomer', {
@@ -165,7 +182,9 @@ window.onload = () => {
             const newDisplay = document.createElement('ul');
             newDisplay.id = 'display';
             document.getElementById('container').appendChild(newDisplay);
-            const url = new URL('http://localhost:3000/customers/deletecustomer:id?');
+            const url = new URL(
+              'http://localhost:3000/customers/deletecustomer:id?'
+            );
             url.searchParams.append('id', customerInDb._id);
             fetch(url, {
               method: 'DELETE',
@@ -216,7 +235,7 @@ window.onload = () => {
     const purchaseDate = document.getElementById('field_C3').value;
     const deliveryDate = document.getElementById('field_D3').value;
     if (!customerID || !bookID || !purchaseDate || !deliveryDate) {
-      return alert("Every Orders field must be completed");
+      return alert('Every Orders field must be completed');
     }
     let order = {
       customerID,
